@@ -101,7 +101,8 @@ if __name__ == '__main__':
         print('Best val Acc: {:4f}'.format(best_acc*100))  
         #model.load_state_dict(torch.load('checkpoint.pt'))
         return  model, avg_train_losses, avg_valid_losses,  train_acc, valid_acc    
-model = models.resnet18(pretrained=True)
+model = models.resnet18()
+model.load_state_dict(torch.load('./resnet18-5c106cde.pth'))
 #set_parameter_requires_grad(model, feature_extract)
 num_ftrs = model.fc.in_features
 model.fc = nn.Linear(num_ftrs, num_classes)
@@ -142,7 +143,7 @@ plt.grid(True)
 plt.legend()
 plt.tight_layout()
 plt.show()
-fig.savefig('loss_plotdataset4.png', bbox_inches='tight')
+fig.savefig('loss_plot.png', bbox_inches='tight')
 
 fig = plt.figure(figsize=(10,8))
 plt.plot(range(1,len(train_acc)+1),train_acc, label='Training Accuracy')
@@ -159,7 +160,7 @@ plt.xlim(0, len(train_acc)+1) # consistent scale
 plt.legend()
 #plt.tight_layout()
 plt.show()
-fig.savefig('accplotdataset4.png', bbox_inches='tight')
+fig.savefig('acc_plot.png', bbox_inches='tight')
 
 
 
