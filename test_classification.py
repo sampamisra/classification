@@ -103,21 +103,21 @@ optimizer= optim.SGD(model.parameters(), lr=0.001, momentum=0.8)
 criterion = nn.CrossEntropyLoss()
 loss_epoch, accuracy_epoch, result = test(model, criterion, optimizer)
 
-preds, true, soft = result
-images_path = test_loader.dataset.samples
-# images_path -> [ [images path, label] * 835 ]
+# preds, true, soft = result
+# images_path = test_loader.dataset.samples
+# # images_path -> [ [images path, label] * 835 ]
 
-with open(f"majority.csv", "w") as f:
-    wr = csv.writer(f)
-    wr.writerow(["file", "prob_0", "prob_1", "prob_2", "prob_3", "prob_4",  "pred", "label"])
-    for i in range(len(preds)):
-        f = os.path.basename(images_path[i][0])
-        prob_0 = round(soft[i][0], 6)
-        prob_1 = round(soft[i][1], 6)
-        prob_2 = round(soft[i][2], 6)
-        prob_3 = round(soft[i][3], 6)
-        prob_4 = round(soft[i][4], 6)
-        pred = preds[i]
-        label = true[i]
-        wr.writerow([f, prob_0, prob_1, prob_2, prob_3, prob_4, pred, label])
+# with open(f"majority.csv", "w") as f:
+#     wr = csv.writer(f)
+#     wr.writerow(["file", "prob_0", "prob_1", "prob_2", "prob_3", "prob_4",  "pred", "label"])
+#     for i in range(len(preds)):
+#         f = os.path.basename(images_path[i][0])
+#         prob_0 = round(soft[i][0], 6)
+#         prob_1 = round(soft[i][1], 6)
+#         prob_2 = round(soft[i][2], 6)
+#         prob_3 = round(soft[i][3], 6)
+#         prob_4 = round(soft[i][4], 6)
+#         pred = preds[i]
+#         label = true[i]
+#         wr.writerow([f, prob_0, prob_1, prob_2, prob_3, prob_4, pred, label])
 
